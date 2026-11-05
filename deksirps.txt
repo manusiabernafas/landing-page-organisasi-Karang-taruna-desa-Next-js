@@ -1,0 +1,90 @@
+Deskripsi
+Basecamp Pemuda RW 05 adalah aplikasi web untuk mengelola organisasi pemuda atau karang taruna tingkat RW/RT dalam satu tempat. Isinya mencakup kas organisasi, iuran bulanan anggota, persiapan event, inventaris barang ber-QR, peminjaman, dokumentasi, dan laporan. Aplikasi ini dibangun dengan Next.js 16 (App Router, Server Actions) dan Supabase (Postgres, Auth, Storage). Semua logika penting yang menyangkut uang, stok, dan peminjaman dijalankan di database lewat fungsi PL/pgSQL dan dilindungi Row Level Security. Jadi walaupun ada yang memanggil API langsung, data tetap tidak bisa diubah sembarangan. Aplikasi ini ditujukan untuk satu organisasi (single-deployment), bukan SaaS multi-tenant. Tampilannya bergaya "basecamp" game-inspired dengan warna flat, mendukung mode gelap, responsif dari HP 280px sampai desktop, dan sudah SEO-ready. Ada halaman publik "Transparansi Kas" agar warga bisa melihat saldo dan arus kas pemuda tanpa login. Fitur khasnya adalah iuran per rumah/tagihan: kakak-adik bisa digabung dalam satu tagihan, pembayaran boleh dicicil atau dirapel, dan setiap pembayaran otomatis masuk buku kas. Ada juga arisan tuan rumah rapat yang diundi secara adil, di mana satu rumah maksimal satu kali per tahun.
+Cara kerja
+Super Admin login lalu mengatur profil organisasi, akun kas, kategori transaksi, dan peran pengguna (Super Admin, Pengurus, Bendahara, Panitia, Anggota). Pengurus mendata anggota, lalu Bendahara mengelompokkan anggota ke dalam tagihan per rumah dengan nominal iuran masing-masing (kakak-adik bisa satu tagihan). Setiap bulan tagihan dibuat otomatis. Bendahara menandai pembayaran cukup dengan memencet sel bulan di Kartu Iuran Setahun, atau mencatat pembayaran cicil/rapel. Sistem mengalokasikan uang ke tagihan tertua lebih dulu, sisanya menjadi deposit bulan berikutnya, dan otomatis membuat transaksi pemasukan di buku kas. Pembayaran yang salah bisa dibatalkan lewat jurnal pembalik, sehingga riwayat tidak pernah hilang. Untuk event, Pengurus membuat kegiatan beserta quest/checklist persiapan, lalu menunjuk panitia. Panitia mencentang quest dan mencatat transaksi event, dan progres event terlihat di dashboard. Barang inventaris didata per unit dengan kode QR. Anggota meminjam barang, lalu saat pengembalian kondisi barang dicek: kalau rusak, unit otomatis masuk jadwal maintenance. Menjelang rapat, Pengurus mengocok arisan tuan rumah. Hanya rumah yang belum pernah menjadi tuan rumah di tahun itu yang ikut diundi, dan anggota baru otomatis masuk undian. Pengurus/Owner memantau semuanya lewat Dashboard (saldo, arus kas, level basecamp, event berjalan, stok) dan bisa mengunduh Laporan (kas, iuran, event, inventaris, peminjaman) dalam CSV atau versi siap cetak/PDF. Setiap perubahan penting tercatat di Audit Log.
+Fitur
+Landing page publik: hero, statistik basecamp, event mendatang, ringkasan kas, dokumentasi
+Halaman Transparansi Kas publik: saldo & arus kas bisa dilihat warga tanpa login
+Dashboard dengan level basecamp (XP dari aktivitas), grafik arus kas Recharts, event berjalan
+Buku kas: pemasukan/pengeluaran, multi akun kas, kategori, nomor bukti otomatis, lampiran nota
+Buku besar per akun dengan saldo berjalan
+Iuran bulanan per tagihan/rumah, kakak-adik bisa satu tagihan, nominal berbeda per tagihan
+Pembayaran iuran cicil & rapel (bayar di muka), alokasi otomatis ke tagihan tertua
+Kartu Iuran Setahun: tandai lunas cukup pencet sel bulan, bisa bebaskan iuran bulan tertentu
+Pembatalan pembayaran lewat jurnal pembalik (riwayat kas tidak pernah dihapus)
+Arisan tuan rumah rapat: kocok acak, 1 rumah maksimal 1x per tahun, anggota baru otomatis ikut
+Manajemen event: kalender, quest/checklist persiapan, panitia, anggaran & transaksi event
+Inventaris per unit dengan QR code, cetak label QR, scan QR dari kamera HP
+Halaman publik hasil scan QR (status & lokasi barang)
+Peminjaman barang: pengajuan, persetujuan, pengembalian dengan cek kondisi
+Barang rusak otomatis masuk jadwal maintenance
+Data anggota lengkap dengan status aktif & riwayat kontribusi
+Dokumentasi foto kegiatan (Supabase Storage) & daftar prestasi
+Laporan kas, iuran, event, inventaris, peminjaman: export CSV & versi cetak/PDF
+Notifikasi dalam aplikasi
+Role & permission: Super Admin, Pengurus, Bendahara, Panitia, Anggota
+Row Level Security di semua tabel: anggota hanya bisa melihat tagihan rumahnya sendiri
+Audit log otomatis (trigger database): siapa mengubah apa dan kapan
+Login Supabase Auth dengan "ingat sesi", lupa & reset password via email
+Mode demo: daftar akun demo tampil di halaman login (bisa dimatikan lewat env)
+Mode gelap, responsif (HP 280px sampai desktop), SEO (sitemap, robots, Open Graph image)
+Seeder data contoh: 52 anggota, 20 event, 42 rumah, 128 unit inventaris, transaksi kas
+Panduan instalasi
+Kebutuhan
+Node.js 20.6+ (disarankan Node 22 LTS) dan npm
+Akun Supabase gratis (https://supabase.com)
+Git (opsional)
+1. Install dependency
+cd pemuda_05
+npm install
+2. Buat project Supabase
+Buat project baru di dashboard Supabase.
+Buka Project Settings → API, salin Project URL, anon key, dan service_role key.
+Buka Connect → Session pooler, salin connection string-nya (untuk menjalankan migrasi dari terminal).
+3. Atur environment
+Copy .env.example menjadi .env.local, lalu isi:
+
+NEXT_PUBLIC_SUPABASE_URL=https://xxxx.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
+SUPABASE_SERVICE_ROLE_KEY=...
+SUPABASE_DB_URL=postgresql://postgres.xxxx:PASSWORD@aws-0-xxx.pooler.supabase.com:5432/postgres
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_ORG_SLUG=pemuda-rw05-kwarasan
+DEMO_PASSWORD=isi-password-demo-min-8-karakter
+NEXT_PUBLIC_DEMO_MODE=true
+SUPABASE_SERVICE_ROLE_KEY bersifat rahasia dan hanya dipakai di server. Jangan pernah dibagikan atau di-commit.
+
+4. Jalankan migrasi database + data contoh
+npm run db:run -- supabase/migrations/*.sql
+npm run db:run -- supabase/seed/seed.sql supabase/seed/seed_iuran_arisan.sql
+Alternatif tanpa terminal: buka SQL Editor di Supabase, lalu jalankan isi file di supabase/migrations/ satu per satu sesuai urutan nama file, kemudian file di supabase/seed/.
+
+5. Buat akun demo
+npm run seed:users
+6. Jalankan aplikasi
+npm run dev
+Akses di http://localhost:3000. Untuk mode production:
+
+npm run build
+npm start
+Login Akun Demo
+Password semua akun demo sama dengan nilai DEMO_PASSWORD di .env.local. Jika NEXT_PUBLIC_DEMO_MODE=true, daftar akun tampil di halaman login dan bisa langsung dipencet.
+
+Email	Role	Akses
+superadmin@basecamp-rw05.test	Super Admin	Semua modul & pengaturan
+pengurus@basecamp-rw05.test	Pengurus	Event, inventaris, anggota, arisan
+bendahara@basecamp-rw05.test	Bendahara	Kas, iuran, laporan keuangan
+panitia@basecamp-rw05.test	Panitia	Quest & transaksi event yang ditugaskan
+anggota@basecamp-rw05.test	Anggota	Dashboard, event, tagihan rumah sendiri
+Wajib: sebelum data asli dipakai, ganti password atau hapus akun demo, lalu set NEXT_PUBLIC_DEMO_MODE=false.
+
+Deploy ke Vercel
+Push project ke GitHub, lalu import di Vercel.
+Isi Environment Variables di Vercel sama seperti .env.local, kecuali SUPABASE_DB_URL yang tidak perlu. Isi NEXT_PUBLIC_SITE_URL dengan domain Vercel kamu.
+Di Supabase, buka Authentication → URL Configuration, isi Site URL dengan domain Vercel, lalu tambahkan https://domain-kamu/auth/callback ke Redirect URLs.
+Redeploy.
+Tech Stack
+Next.js 16 (App Router, Server Actions), React 19, TypeScript
+Supabase: Postgres + Row Level Security, Auth, Storage
+Tailwind CSS v4, Lucide icons, Recharts
+React Hook Form + Zod, qrcode.react, @zxing/browser (scan QR)

@@ -1,0 +1,325 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* =====================================================================
+   BASECAMP PEMUDA RW 05 — Design tokens
+   Grass Green · Sky Blue · Warm Gold · Wood Brown · Cream · Forest
+   ===================================================================== */
+:root {
+  --bg: #fbf7ee;
+  --bg-soft: #f4eedf;
+  --surface: #ffffff;
+  --surface-2: #fdfaf3;
+  --border: #e8dfcb;
+  --border-strong: #d8ccb2;
+  --text: #1c2b21;
+  --text-muted: #5d6b60;
+  --text-subtle: #8a9589;
+
+  --grass: #3e9b4f;
+  --grass-600: #2f7f3e;
+  --grass-100: #e3f3e2;
+  --sky: #3d95cf;
+  --sky-600: #2877ad;
+  --sky-100: #e1f0fa;
+  --gold: #f2b632;
+  --gold-600: #c98d0f;
+  --gold-100: #fdf1d3;
+  --wood: #8b5e3c;
+  --wood-600: #6e4a2e;
+  --wood-100: #f2e6da;
+  --forest: #16301f;
+
+  --success: #2f8f46;
+  --success-bg: #e3f3e2;
+  --warning: #b7791f;
+  --warning-bg: #fdf1d3;
+  --danger: #c2413a;
+  --danger-bg: #fbe4e1;
+  --info: #2877ad;
+  --info-bg: #e1f0fa;
+
+  --chart-income: #3e9b4f;
+  --chart-expense: #e07a5f;
+  --chart-grid: #ece4d2;
+
+  --ring: #3e9b4f;
+  --shadow-sm: 0 1px 2px rgb(60 45 20 / 0.06);
+  --shadow: 0 1px 2px rgb(60 45 20 / 0.05), 0 6px 18px -8px rgb(60 45 20 / 0.14);
+  --shadow-lg: 0 2px 4px rgb(60 45 20 / 0.05), 0 18px 40px -16px rgb(60 45 20 / 0.22);
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1a14;
+  --bg-soft: #13211a;
+  --surface: #17261e;
+  --surface-2: #1b2c23;
+  --border: #2a3d32;
+  --border-strong: #37503f;
+  --text: #edf3ea;
+  --text-muted: #aab8ab;
+  --text-subtle: #7f8f82;
+
+  --grass: #5cbf6c;
+  --grass-600: #7fd08b;
+  --grass-100: #1f3a28;
+  --sky: #6bb6e6;
+  --sky-600: #8ec8ee;
+  --sky-100: #1a3040;
+  --gold: #f5c451;
+  --gold-600: #f7d27a;
+  --gold-100: #3a3018;
+  --wood: #c49a74;
+  --wood-600: #d7b392;
+  --wood-100: #33281f;
+  --forest: #0b140f;
+
+  --success: #6fcf7f;
+  --success-bg: #1f3a28;
+  --warning: #f5c451;
+  --warning-bg: #3a3018;
+  --danger: #f08a80;
+  --danger-bg: #3d2220;
+  --info: #8ec8ee;
+  --info-bg: #1a3040;
+
+  --chart-income: #6fcf7f;
+  --chart-expense: #f29a82;
+  --chart-grid: #2a3d32;
+
+  --ring: #7fd08b;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 20px -10px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 40px -16px rgb(0 0 0 / 0.6);
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
+  --color-subtle: var(--text-subtle);
+  --color-grass: var(--grass);
+  --color-grass-600: var(--grass-600);
+  --color-grass-100: var(--grass-100);
+  --color-sky: var(--sky);
+  --color-sky-600: var(--sky-600);
+  --color-sky-100: var(--sky-100);
+  --color-gold: var(--gold);
+  --color-gold-600: var(--gold-600);
+  --color-gold-100: var(--gold-100);
+  --color-wood: var(--wood);
+  --color-wood-600: var(--wood-600);
+  --color-wood-100: var(--wood-100);
+  --color-forest: var(--forest);
+  --color-success: var(--success);
+  --color-success-bg: var(--success-bg);
+  --color-warning: var(--warning);
+  --color-warning-bg: var(--warning-bg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-info: var(--info);
+  --color-info-bg: var(--info-bg);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: var(--shadow);
+  --shadow-soft-sm: var(--shadow-sm);
+  --shadow-soft-lg: var(--shadow-lg);
+
+  --radius-card: 1.125rem;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: color-mix(in oklab, var(--gold) 45%, transparent);
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Kertas bertekstur halus untuk panel basecamp */
+.paper {
+  background-color: var(--surface);
+  background-image: radial-gradient(color-mix(in oklab, var(--wood) 7%, transparent) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------
+   Micro animations (dihormati prefers-reduced-motion)
+   --------------------------------------------------------------------- */
+@keyframes cloud-drift {
+  from { transform: translateX(-4%); }
+  to { transform: translateX(6%); }
+}
+@keyframes leaf-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2.5deg); }
+}
+@keyframes lamp-glow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+@keyframes flag-wave {
+  0%, 100% { transform: skewY(0deg) scaleX(1); }
+  50% { transform: skewY(-4deg) scaleX(0.94); }
+}
+@keyframes bar-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.anim-cloud { animation: cloud-drift 18s ease-in-out infinite alternate; }
+.anim-cloud-slow { animation: cloud-drift 26s ease-in-out infinite alternate-reverse; }
+.anim-leaf { animation: leaf-sway 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom center; }
+.anim-leaf-2 { animation: leaf-sway 5.5s ease-in-out -1.5s infinite; transform-box: fill-box; transform-origin: bottom center; }
+.anim-lamp { animation: lamp-glow 2.8s ease-in-out infinite; }
+.anim-flag { animation: flag-wave 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: left center; }
+.anim-bar { animation: bar-fill 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; transform-origin: left center; }
+.anim-rise { animation: rise-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.skeleton {
+  background: var(--bg-soft);
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+
+dialog::backdrop {
+  background: rgb(15 26 20 / 0.45);
+  backdrop-filter: blur(2px);
+}
+dialog[open] {
+  animation: rise-in 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print,
+  body aside,
+  body header,
+  body nav { display: none !important; }
+  body { background: #fff; color: #16301f; }
+  main { margin: 0 !important; padding: 0 !important; }
+}
+
+/* ---------------------------------------------------------------------
+   Palet ilustrasi basecamp (siang / malam)
+   --------------------------------------------------------------------- */
+:root {
+  --sc-sky-top: #cfe8f7;
+  --sc-sky-bottom: #f7f0dc;
+  --sc-sun: #f7c948;
+  --sc-cloud: #ffffff;
+  --sc-mountain: #9cb7c9;
+  --sc-mountain-snow: #e7eef2;
+  --sc-hill-far: #9fcf95;
+  --sc-hill-near: #7dbb6f;
+  --sc-ground: #8fc97a;
+  --sc-ground-dark: #6fae5f;
+  --sc-field: #6fb866;
+  --sc-line: #f4f9ef;
+  --sc-path: #e6d3ad;
+  --sc-wall: #fbf3e2;
+  --sc-wall-shade: #eadbbd;
+  --sc-roof: #b8562f;
+  --sc-roof-dark: #93401f;
+  --sc-wood: #8b5e3c;
+  --sc-wood-light: #b07c52;
+  --sc-window: #9fd3ef;
+  --sc-tent: #3e9b4f;
+  --sc-tent-2: #2f7f3e;
+  --sc-tree: #4f9d53;
+  --sc-tree-2: #3d8743;
+  --sc-trunk: #7a5234;
+  --sc-paper: #fffaf0;
+  --sc-chair: #d9463b;
+  --sc-skin: #d9a47a;
+  --sc-light: #ffd66b;
+  --sc-shadow: rgb(40 60 30 / 0.16);
+}
+:root[data-theme="dark"] {
+  --sc-sky-top: #0f2233;
+  --sc-sky-bottom: #28415a;
+  --sc-sun: #f3ecd2;
+  --sc-cloud: #3a5268;
+  --sc-mountain: #2c4256;
+  --sc-mountain-snow: #465c70;
+  --sc-hill-far: #24452f;
+  --sc-hill-near: #1f3d29;
+  --sc-ground: #234a2f;
+  --sc-ground-dark: #1b3b25;
+  --sc-field: #2a5636;
+  --sc-line: #7da487;
+  --sc-path: #5a4a36;
+  --sc-wall: #d8cdb6;
+  --sc-wall-shade: #b3a88f;
+  --sc-roof: #7e3a22;
+  --sc-roof-dark: #5e2a17;
+  --sc-wood: #6e4a2e;
+  --sc-wood-light: #8a6242;
+  --sc-window: #ffd66b;
+  --sc-tent: #3a8a4a;
+  --sc-tent-2: #2b6b38;
+  --sc-tree: #2f6a3a;
+  --sc-tree-2: #25572f;
+  --sc-trunk: #5a3c26;
+  --sc-paper: #e9e1cd;
+  --sc-chair: #b5392f;
+  --sc-skin: #b98a66;
+  --sc-light: #ffd66b;
+  --sc-shadow: rgb(0 0 0 / 0.3);
+}
