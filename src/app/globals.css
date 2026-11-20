@@ -4,47 +4,47 @@
 
 /* =====================================================================
    BASECAMP PEMUDA RW 05 — Design tokens
-   Grass Green · Sky Blue · Warm Gold · Wood Brown · Cream · Forest
+   Pastel Teal · Soft Blue · Pink · Lavender · Cream
    ===================================================================== */
 :root {
-  --bg: #fbf7ee;
-  --bg-soft: #f4eedf;
+  --bg: #fff8fc;
+  --bg-soft: #f5efff;
   --surface: #ffffff;
-  --surface-2: #fdfaf3;
-  --border: #e8dfcb;
-  --border-strong: #d8ccb2;
-  --text: #1c2b21;
-  --text-muted: #5d6b60;
-  --text-subtle: #8a9589;
+  --surface-2: #fffafd;
+  --border: #eadff0;
+  --border-strong: #d9c4e8;
+  --text: #2f2540;
+  --text-muted: #706580;
+  --text-subtle: #9a8da8;
 
-  --grass: #3e9b4f;
-  --grass-600: #2f7f3e;
-  --grass-100: #e3f3e2;
-  --sky: #3d95cf;
-  --sky-600: #2877ad;
-  --sky-100: #e1f0fa;
-  --gold: #f2b632;
-  --gold-600: #c98d0f;
-  --gold-100: #fdf1d3;
-  --wood: #8b5e3c;
-  --wood-600: #6e4a2e;
-  --wood-100: #f2e6da;
-  --forest: #16301f;
+  --grass: #5b9f8d;
+  --grass-600: #427d70;
+  --grass-100: #e3f5ef;
+  --sky: #6fa8d8;
+  --sky-600: #4d82b0;
+  --sky-100: #e6f3ff;
+  --gold: #ef78ae;
+  --gold-600: #c65387;
+  --gold-100: #fff0c7;
+  --wood: #8a68b1;
+  --wood-600: #6b4d90;
+  --wood-100: #eee6fa;
+  --forest: #332449;
 
-  --success: #2f8f46;
-  --success-bg: #e3f3e2;
-  --warning: #b7791f;
-  --warning-bg: #fdf1d3;
-  --danger: #c2413a;
-  --danger-bg: #fbe4e1;
-  --info: #2877ad;
-  --info-bg: #e1f0fa;
+  --success: #4c9a78;
+  --success-bg: #e3f5ef;
+  --warning: #bc7d35;
+  --warning-bg: #fff0c7;
+  --danger: #c95770;
+  --danger-bg: #ffe8ee;
+  --info: #4d82b0;
+  --info-bg: #e6f3ff;
 
-  --chart-income: #3e9b4f;
-  --chart-expense: #e07a5f;
-  --chart-grid: #ece4d2;
+  --chart-income: #5b9f8d;
+  --chart-expense: #df718f;
+  --chart-grid: #eee5f3;
 
-  --ring: #3e9b4f;
+  --ring: #5b9f8d;
   --shadow-sm: 0 1px 2px rgb(60 45 20 / 0.06);
   --shadow: 0 1px 2px rgb(60 45 20 / 0.05), 0 6px 18px -8px rgb(60 45 20 / 0.14);
   --shadow-lg: 0 2px 4px rgb(60 45 20 / 0.05), 0 18px 40px -16px rgb(60 45 20 / 0.22);
@@ -252,7 +252,7 @@ dialog[open] {
   body aside,
   body header,
   body nav { display: none !important; }
-  body { background: #fff; color: #16301f; }
+  body { background: #fff; color: #332449; }
   main { margin: 0 !important; padding: 0 !important; }
 }
 
@@ -277,11 +277,11 @@ dialog[open] {
   --sc-wall-shade: #eadbbd;
   --sc-roof: #b8562f;
   --sc-roof-dark: #93401f;
-  --sc-wood: #8b5e3c;
+  --sc-wood: #8a68b1;
   --sc-wood-light: #b07c52;
   --sc-window: #9fd3ef;
-  --sc-tent: #3e9b4f;
-  --sc-tent-2: #2f7f3e;
+  --sc-tent: #5b9f8d;
+  --sc-tent-2: #427d70;
   --sc-tree: #4f9d53;
   --sc-tree-2: #3d8743;
   --sc-trunk: #7a5234;
@@ -309,7 +309,7 @@ dialog[open] {
   --sc-wall-shade: #b3a88f;
   --sc-roof: #7e3a22;
   --sc-roof-dark: #5e2a17;
-  --sc-wood: #6e4a2e;
+  --sc-wood: #6b4d90;
   --sc-wood-light: #8a6242;
   --sc-window: #ffd66b;
   --sc-tent: #3a8a4a;
